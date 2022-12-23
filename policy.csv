@@ -11,8 +11,8 @@ Player,2,3,4,5,6,7,8,9,10,A
 12,H,S,S,S,S,H,H,H,H,H
 13,S,S,S,S,S,H,H,H,H,H
 14,S,S,S,S,S,H,H,H,H,H
-15,S,S,S,S,S,H,H,H,SU,S
-16,S,S,S,S,S,H,H,SU,SU,S
+15,S,S,S,S,S,H,H,H,SU,SU
+16,S,S,S,S,S,H,H,SU,SU,SU
 17,S,S,S,S,S,S,S,S,S,S
 18,S,S,S,S,S,S,S,S,S,S
 19,S,S,S,S,S,S,S,S,S,S
@@ -34,6 +34,6 @@ Player,2,3,4,5,6,7,8,9,10,A
 "5,5",D,D,D,D,D,D,D,D,H,H
 "6,6",P,P,P,P,P,P,H,H,H,H
 "7,7",P,P,P,P,P,P,P,H,H,H
-"8,8",P,P,P,P,P,P,P,P,P,S
+"8,8",P,P,P,P,P,P,P,P,P,SU
 "9,9",P,P,P,P,P,S,P,P,S,S
 "10,10",S,S,S,S,S,S,S,S,S,S
