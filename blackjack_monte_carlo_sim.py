@@ -192,7 +192,7 @@ for monte_carlo_index, i in enumerate(range(100000)):
         temp = pd.DataFrame([[payout, portfolio, 0, 0, 1, 0, 0]],
                                 columns=['Payout', 'Portfolio_Value', 'Win', 'Loss', 'Surrender', 'Blackjack', 'Push'],
                                 index=[monte_carlo_index])
-        portfolio_df = portfolio_df.append(temp)
+        portfolio_df = pd.concat([portfolio_df, temp])
         continue
 
     '''RUN DEALER STRATEGY'''
@@ -233,19 +233,19 @@ for monte_carlo_index, i in enumerate(range(100000)):
                 temp = pd.DataFrame([[payout, portfolio, 0, 0, 0, 0, 1]],
                                 columns=['Payout', 'Portfolio_Value', 'Win', 'Loss', 'Surrender', 'Blackjack', 'Push'],
                                 index=[monte_carlo_index])
-                portfolio_df = portfolio_df.append(temp)
+                portfolio_df = pd.concat([portfolio_df, temp])
 
             if payout > 0:
                 temp = pd.DataFrame([[payout, portfolio, 1, 0, 0, 1, 0]],
                                 columns=['Payout', 'Portfolio_Value', 'Win', 'Loss', 'Surrender', 'Blackjack', 'Push'],
                                 index=[monte_carlo_index])
-                portfolio_df = portfolio_df.append(temp)
+                portfolio_df = pd.concat([portfolio_df, temp])
 
             if payout < 0:
                 temp = pd.DataFrame([[payout, portfolio, 0, 1, 0, 0, 0]],
                                 columns=['Payout', 'Portfolio_Value', 'Win', 'Loss', 'Surrender', 'Blackjack', 'Push'],
                                 index=[monte_carlo_index])
-                portfolio_df = portfolio_df.append(temp)
+                portfolio_df = pd.concat([portfolio_df, temp])
 
             # go to next simulation iteration
             continue
@@ -285,24 +285,24 @@ for monte_carlo_index, i in enumerate(range(100000)):
             temp = pd.DataFrame([[payout, portfolio, 0, 0, 0, 0, 1]],
                                 columns=['Payout', 'Portfolio_Value', 'Win', 'Loss', 'Surrender', 'Blackjack', 'Push'],
                                 index=[monte_carlo_index])
-            portfolio_df = portfolio_df.append(temp)
+            portfolio_df = pd.concat([portfolio_df, temp])
 
         if payout > 0:
             temp = pd.DataFrame([[payout, portfolio, 1, 0, 0, 0, 0]],
                                 columns=['Payout', 'Portfolio_Value', 'Win', 'Loss', 'Surrender', 'Blackjack', 'Push'],
                                 index=[monte_carlo_index])
-            portfolio_df = portfolio_df.append(temp)
+            portfolio_df = pd.concat([portfolio_df, temp])
 
         if payout < 0:
             temp = pd.DataFrame([[payout, portfolio, 0, 1, 0, 0, 0]],
                                 columns=['Payout', 'Portfolio_Value', 'Win', 'Loss', 'Surrender', 'Blackjack', 'Push'],
                                 index=[monte_carlo_index])
-            portfolio_df = portfolio_df.append(temp)
+            portfolio_df = pd.concat([portfolio_df, temp])
 
         # temp = pd.DataFrame([[dealer_hand, player_hands_list]],
         #                                 columns=['Dealer_Hand', 'Player_Hand'],
         #                                 index=[monte_carlo_index])
-        # portfolio_df = portfolio_df.append(temp)
+        # portfolio_df = pd.concat([portfolio_df, temp])
 
 # portfolio_df.head()
 # portfolio_df = portfolio_df.iloc[1:]
@@ -378,3 +378,8 @@ portfolio_df.to_csv('monte_carlo_results.csv')
 # save final portfolio value to csv
 final_portfolio_value = str(final_portfolio_value)
 open('portfolio_value.csv', 'a').write(final_portfolio_value) 
+
+# save summary statistics to csv
+summary_statistics = pd.DataFrame([[expected_payout, max_drawdown, win_loss_ratio, house_edge, final_portfolio_value]],
+                                columns=['Expected Payout', 'Max Drawdown', 'Win/Loss Ratio', 'House Edge', 'Final Portfolio Value'])
+summary_statistics.to_csv('simulation_output/summary_statistics.csv')
